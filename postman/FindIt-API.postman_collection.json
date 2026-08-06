@@ -1,0 +1,245 @@
+{
+  "info": {
+    "name": "FindIt API",
+    "_postman_id": "db9d6b6b-9fcb-4f7d-b661-2c44e5ef7d44",
+    "description": "Postman collection for FindIt API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": "PASTE_VALID_JWT_HERE"
+    },
+    {
+      "key": "lostItemId",
+      "value": ""
+    },
+    {
+      "key": "foundItemId",
+      "value": ""
+    },
+    {
+      "key": "claimId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Lost Items",
+      "item": [
+        {
+          "name": "Get Lost Items",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/lost-items"
+          }
+        },
+        {
+          "name": "Get Lost Item By ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/lost-items/{{lostItemId}}"
+          }
+        },
+        {
+          "name": "Create Lost Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Black Backpack\",\n  \"description\": \"Contains a laptop and notebooks\",\n  \"category\": \"Bag\",\n  \"location\": {\n    \"description\": \"Near the school library\",\n    \"city\": \"Lagos\",\n    \"state\": \"Lagos\",\n    \"country\": \"Nigeria\",\n    \"landmark\": \"Main gate\"\n  },\n  \"dateLost\": \"2026-07-30T10:00:00.000Z\",\n  \"contactPhone\": \"+2348012345678\",\n  \"tags\": [\"black\", \"laptop\"],\n  \"images\": [\"https://example.com/bag.jpg\"],\n  \"rewardAmount\": 5000\n}"
+            },
+            "url": "{{baseUrl}}/api/lost-items"
+          }
+        },
+        {
+          "name": "Update Lost Item",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"recovered\",\n  \"rewardAmount\": 7000\n}"
+            },
+            "url": "{{baseUrl}}/api/lost-items/{{lostItemId}}"
+          }
+        },
+        {
+          "name": "Delete Lost Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/lost-items/{{lostItemId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Found Items",
+      "item": [
+        {
+          "name": "Get Found Items",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/found-items"
+          }
+        },
+        {
+          "name": "Create Found Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Silver iPhone\",\n  \"description\": \"Phone found on a bus seat\",\n  \"category\": \"Phone\",\n  \"location\": {\n    \"description\": \"BRT terminal\",\n    \"city\": \"Lagos\",\n    \"state\": \"Lagos\",\n    \"country\": \"Nigeria\",\n    \"landmark\": \"Waiting area\"\n  },\n  \"dateFound\": \"2026-07-31T14:30:00.000Z\",\n  \"contactPhone\": \"+2348098765432\",\n  \"storageLocation\": \"Terminal office\",\n  \"tags\": [\"iphone\", \"silver\"]\n}"
+            },
+            "url": "{{baseUrl}}/api/found-items"
+          }
+        },
+        {
+          "name": "Update Found Item",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"returned\",\n  \"storageLocation\": \"Owner received item\"\n}"
+            },
+            "url": "{{baseUrl}}/api/found-items/{{foundItemId}}"
+          }
+        },
+        {
+          "name": "Delete Found Item",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/found-items/{{foundItemId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "Search Items",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/items/search?type=all&category=Phone&location=Lagos&keyword=iphone"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Claims",
+      "item": [
+        {
+          "name": "Create Claim",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"foundItem\": \"{{foundItemId}}\",\n  \"reason\": \"It is my phone and I can describe the wallpaper and passcode hint\",\n  \"proofDetails\": \"The lockscreen has my child photo\",\n  \"supportingImages\": [\"https://example.com/receipt.jpg\"]\n}"
+            },
+            "url": "{{baseUrl}}/api/claims"
+          }
+        },
+        {
+          "name": "Get Claims",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/claims"
+          }
+        },
+        {
+          "name": "Update Claim",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"approved\",\n  \"resolutionNote\": \"Ownership details matched\"\n}"
+            },
+            "url": "{{baseUrl}}/api/claims/{{claimId}}"
+          }
+        }
+      ]
+    }
+  ]
+}
