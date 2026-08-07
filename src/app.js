@@ -4,6 +4,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
 const lostItemRoutes = require('./routes/lostItemRoutes');
 const foundItemRoutes = require('./routes/foundItemRoutes');
 const searchRoutes = require('./routes/searchRoutes');
@@ -22,12 +24,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (_req, res) => {
-  res.json({
+  res.status(200).json({
     success: true,
-    message: 'FindIt API is running',
+    message: 'Welcome to FindIt API - Community Lost and Found API',
   });
 });
 
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/lost-items', lostItemRoutes);
 app.use('/api/found-items', foundItemRoutes);
 app.use('/api/items', searchRoutes);

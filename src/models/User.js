@@ -3,10 +3,15 @@ const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema(
   {
+    fullName: {
+      type: String,
+      trim: true,
+      default: '',
+    },
     name: {
       type: String,
-      required: [true, 'Please add a name'],
       trim: true,
+      default: '',
     },
     email: {
       type: String,
@@ -30,16 +35,48 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Please add a phone number'],
       trim: true,
     },
+    state: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    lga: {
+      type: String,
+      trim: true,
+      default: '',
+    },
     role: {
       type: String,
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'customer', 'vendor', 'rider'],
       default: 'user',
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: Date,
     },
   },
   {
     timestamps: true,
   }
 );
+
+userSchema.pre('validate', function (next) {
+  if (!this.fullName && this.name) {
+    this.fullName = this.name;
+  }
+
+  if (!this.name && this.fullName) {
+    this.name = this.fullName;
+  }
+
+  next();
+});
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {

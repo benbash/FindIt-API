@@ -106,8 +106,8 @@ exports.validateRegister = runValidation((req) => {
   const body = req.body;
   const errors = [];
 
-  if (!isNonEmptyString(body.name)) {
-    errors.push('name is required');
+  if (!isNonEmptyString(body.fullName)) {
+    errors.push('fullName is required');
   }
 
   if (!isNonEmptyString(body.email)) {
@@ -122,7 +122,17 @@ exports.validateRegister = runValidation((req) => {
     errors.push('phoneNumber is required');
   }
 
-  errors.push(...validateStatus(body.role, ['user', 'admin'], 'role'));
+  if (!isNonEmptyString(body.state)) {
+    errors.push('state is required');
+  }
+
+  if (!isNonEmptyString(body.lga)) {
+    errors.push('lga is required');
+  }
+
+  errors.push(
+    ...validateStatus(body.role, ['user', 'admin', 'customer', 'vendor', 'rider'], 'role')
+  );
 
   return errors;
 });
@@ -137,6 +147,49 @@ exports.validateLogin = runValidation((req) => {
 
   if (!isNonEmptyString(body.password)) {
     errors.push('password is required');
+  }
+
+  return errors;
+});
+
+exports.validateForgotPassword = runValidation((req) => {
+  const errors = [];
+
+  if (!isNonEmptyString(req.body.email)) {
+    errors.push('email is required');
+  }
+
+  return errors;
+});
+
+exports.validateResetPassword = runValidation((req) => {
+  const errors = [];
+
+  if (!isNonEmptyString(req.body.password) || req.body.password.length < 6) {
+    errors.push('password is required and must be at least 6 characters');
+  }
+
+  return errors;
+});
+
+exports.validateProfileUpdate = runValidation((req) => {
+  const body = req.body;
+  const errors = [];
+
+  ['fullName', 'name', 'phoneNumber', 'state', 'lga'].forEach((field) => {
+    if (body[field] !== undefined && !isNonEmptyString(body[field])) {
+      errors.push(`${field} must be a non-empty string`);
+    }
+  });
+
+  if (body.email !== undefined && !isNonEmptyString(body.email)) {
+    errors.push('email must be a non-empty string');
+  }
+
+  if (body.role !== undefined) {
+    errors.push(
+      ...validateStatus(body.role, ['user', 'admin', 'customer', 'vendor', 'rider'], 'role')
+    );
   }
 
   return errors;
