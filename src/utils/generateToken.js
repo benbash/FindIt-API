@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import jwt from "jsonwebtoken";
 
 const generateToken = (userId) => {
@@ -11,3 +12,13 @@ const generateToken = (userId) => {
 };
 
 export default generateToken;
+=======
+import jwt from 'jsonwebtoken';
+
+const generateToken = (userId) =>
+  jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+    expiresIn: '7d',
+  });
+
+export default generateToken;
+>>>>>>> origin/master
