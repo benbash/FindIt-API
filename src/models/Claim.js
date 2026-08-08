@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const claimSchema = new mongoose.Schema(
   {
@@ -48,4 +48,4 @@ const claimSchema = new mongoose.Schema(
 
 claimSchema.index({ foundItem: 1, claimant: 1 }, { unique: true });
 
-module.exports = mongoose.model('Claim', claimSchema);
+export default mongoose.model('Claim', claimSchema);

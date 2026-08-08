@@ -1,18 +1,18 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   registerUser,
   loginUser,
   forgotPassword,
   resetPassword,
   getMe,
-} = require('../controllers/authController');
-const { protect } = require('../middleware/authMiddleware');
-const {
+} from '../controllers/authController.js';
+import { protect } from '../middleware/authMiddleware.js';
+import {
   validateRegister,
   validateLogin,
   validateForgotPassword,
   validateResetPassword,
-} = require('../middleware/validateRequest');
+} from '../middleware/validateRequest.js';
 
 const router = express.Router();
 
@@ -22,4 +22,4 @@ router.post('/forgot-password', validateForgotPassword, forgotPassword);
 router.patch('/reset-password/:token', validateResetPassword, resetPassword);
 router.get('/me', protect, getMe);
 
-module.exports = router;
+export default router;

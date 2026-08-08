@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema(
   {
@@ -66,7 +66,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.pre('validate', function (next) {
+userSchema.pre('validate', function () {
   if (!this.fullName && this.name) {
     this.fullName = this.name;
   }
@@ -74,22 +74,19 @@ userSchema.pre('validate', function (next) {
   if (!this.name && this.fullName) {
     this.name = this.fullName;
   }
-
-  next();
 });
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
   if (!this.isModified('password')) {
-    return next();
+    return;
   }
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  return next();
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);

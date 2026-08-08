@@ -1,6 +1,6 @@
-const User = require('../models/User');
+import User from '../models/User.js';
 
-exports.updateProfileService = async (userId, updateData) => {
+export const updateProfileService = async (userId, updateData) => {
   const sanitizedUpdateData = { ...updateData };
 
   delete sanitizedUpdateData.password;

@@ -1,8 +1,8 @@
-const Claim = require('../models/Claim');
-const FoundItem = require('../models/FoundItem');
-const AppError = require('../utils/appError');
+import Claim from '../models/Claim.js';
+import FoundItem from '../models/FoundItem.js';
+import AppError from '../utils/appError.js';
 
-exports.createClaim = async (req, res, next) => {
+export const createClaim = async (req, res, next) => {
   try {
     const foundItem = await FoundItem.findById(req.body.foundItem);
 
@@ -37,7 +37,7 @@ exports.createClaim = async (req, res, next) => {
   }
 };
 
-exports.getClaims = async (req, res, next) => {
+export const getClaims = async (req, res, next) => {
   try {
     let filter = {};
 
@@ -71,7 +71,7 @@ exports.getClaims = async (req, res, next) => {
   }
 };
 
-exports.updateClaim = async (req, res, next) => {
+export const updateClaim = async (req, res, next) => {
   try {
     const claim = await Claim.findById(req.params.id).populate('foundItem');
 

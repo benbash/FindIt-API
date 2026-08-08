@@ -1,15 +1,15 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   createClaim,
   getClaims,
   updateClaim,
-} = require('../controllers/claimController');
-const { protect } = require('../middleware/authMiddleware');
-const {
+} from '../controllers/claimController.js';
+import { protect } from '../middleware/authMiddleware.js';
+import {
   validateObjectIdParam,
   validateClaimCreate,
   validateClaimUpdate,
-} = require('../middleware/validateRequest');
+} from '../middleware/validateRequest.js';
 
 const router = express.Router();
 
@@ -19,4 +19,4 @@ router
   .route('/:id')
   .patch(protect, validateObjectIdParam('id'), validateClaimUpdate, updateClaim);
 
-module.exports = router;
+export default router;

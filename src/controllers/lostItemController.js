@@ -1,7 +1,7 @@
-const LostItem = require('../models/LostItem');
-const AppError = require('../utils/appError');
+import LostItem from '../models/LostItem.js';
+import AppError from '../utils/appError.js';
 
-exports.createLostItem = async (req, res, next) => {
+export const createLostItem = async (req, res, next) => {
   try {
     const lostItem = await LostItem.create({
       ...req.body,
@@ -23,7 +23,7 @@ exports.createLostItem = async (req, res, next) => {
   }
 };
 
-exports.getLostItems = async (req, res, next) => {
+export const getLostItems = async (req, res, next) => {
   try {
     const { category, city, state, status, reportedBy, keyword } = req.query;
     const filter = {};
@@ -71,7 +71,7 @@ exports.getLostItems = async (req, res, next) => {
   }
 };
 
-exports.getLostItemById = async (req, res, next) => {
+export const getLostItemById = async (req, res, next) => {
   try {
     const item = await LostItem.findById(req.params.id).populate(
       'reportedBy',
@@ -91,7 +91,7 @@ exports.getLostItemById = async (req, res, next) => {
   }
 };
 
-exports.updateLostItem = async (req, res, next) => {
+export const updateLostItem = async (req, res, next) => {
   try {
     const item = await LostItem.findById(req.params.id);
 
@@ -124,7 +124,7 @@ exports.updateLostItem = async (req, res, next) => {
   }
 };
 
-exports.deleteLostItem = async (req, res, next) => {
+export const deleteLostItem = async (req, res, next) => {
   try {
     const item = await LostItem.findById(req.params.id);
 

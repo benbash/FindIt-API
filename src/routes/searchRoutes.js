@@ -1,9 +1,9 @@
-const express = require('express');
-const { searchItems } = require('../controllers/searchController');
-const { validateItemSearchQuery } = require('../middleware/validateRequest');
+import express from 'express';
+import { searchItems } from '../controllers/searchController.js';
+import { validateItemSearchQuery } from '../middleware/validateRequest.js';
 
 const router = express.Router();
 
 router.get('/search', validateItemSearchQuery, searchItems);
 
-module.exports = router;
+export default router;

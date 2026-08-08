@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
-exports.protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   let token;
 
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
@@ -29,7 +29,7 @@ exports.protect = async (req, res, next) => {
   });
 };
 
-exports.authorize = (...roles) => (req, res, next) => {
+export const authorize = (...roles) => (req, res, next) => {
   if (!roles.includes(req.user.role)) {
     return res.status(403).json({
       success: false,

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const AppError = require('../utils/appError');
+import mongoose from 'mongoose';
+import AppError from '../utils/appError.js';
 
 const isPlainObject = (value) =>
   value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -93,7 +93,7 @@ const validateStatus = (value, allowedValues, fieldName) => {
   return [];
 };
 
-exports.validateObjectIdParam = (paramName) =>
+export const validateObjectIdParam = (paramName) =>
   runValidation((req) => {
     if (!isValidObjectId(req.params[paramName])) {
       return [`${paramName} must be a valid MongoDB ObjectId`];
@@ -102,7 +102,7 @@ exports.validateObjectIdParam = (paramName) =>
     return [];
   });
 
-exports.validateRegister = runValidation((req) => {
+export const validateRegister = runValidation((req) => {
   const body = req.body;
   const errors = [];
 
@@ -137,7 +137,7 @@ exports.validateRegister = runValidation((req) => {
   return errors;
 });
 
-exports.validateLogin = runValidation((req) => {
+export const validateLogin = runValidation((req) => {
   const body = req.body;
   const errors = [];
 
@@ -152,7 +152,7 @@ exports.validateLogin = runValidation((req) => {
   return errors;
 });
 
-exports.validateForgotPassword = runValidation((req) => {
+export const validateForgotPassword = runValidation((req) => {
   const errors = [];
 
   if (!isNonEmptyString(req.body.email)) {
@@ -162,7 +162,7 @@ exports.validateForgotPassword = runValidation((req) => {
   return errors;
 });
 
-exports.validateResetPassword = runValidation((req) => {
+export const validateResetPassword = runValidation((req) => {
   const errors = [];
 
   if (!isNonEmptyString(req.body.password) || req.body.password.length < 6) {
@@ -172,7 +172,7 @@ exports.validateResetPassword = runValidation((req) => {
   return errors;
 });
 
-exports.validateProfileUpdate = runValidation((req) => {
+export const validateProfileUpdate = runValidation((req) => {
   const body = req.body;
   const errors = [];
 
@@ -227,10 +227,6 @@ const validateItemBody = (body, mode = 'create') => {
     errors.push('tags must be an array of strings');
   }
 
-  if (body.rewardAmount !== undefined && (!isNumber(body.rewardAmount) || body.rewardAmount < 0)) {
-    errors.push('rewardAmount must be a non-negative number');
-  }
-
   if (body.isAnonymous !== undefined && !isBoolean(body.isAnonymous)) {
     errors.push('isAnonymous must be a boolean');
   }
@@ -238,7 +234,7 @@ const validateItemBody = (body, mode = 'create') => {
   return errors;
 };
 
-exports.validateLostItemCreate = runValidation((req) => {
+export const validateLostItemCreate = runValidation((req) => {
   const errors = validateItemBody(req.body, 'create');
   errors.push(...validateDateString(req.body.dateLost, 'dateLost', true));
   errors.push(
@@ -247,7 +243,7 @@ exports.validateLostItemCreate = runValidation((req) => {
   return errors;
 });
 
-exports.validateLostItemUpdate = runValidation((req) => {
+export const validateLostItemUpdate = runValidation((req) => {
   const errors = validateItemBody(req.body, 'update');
   errors.push(...validateDateString(req.body.dateLost, 'dateLost'));
   errors.push(
@@ -256,7 +252,7 @@ exports.validateLostItemUpdate = runValidation((req) => {
   return errors;
 });
 
-exports.validateFoundItemCreate = runValidation((req) => {
+export const validateFoundItemCreate = runValidation((req) => {
   const errors = validateItemBody(req.body, 'create');
   errors.push(...validateDateString(req.body.dateFound, 'dateFound', true));
   errors.push(
@@ -265,7 +261,7 @@ exports.validateFoundItemCreate = runValidation((req) => {
   return errors;
 });
 
-exports.validateFoundItemUpdate = runValidation((req) => {
+export const validateFoundItemUpdate = runValidation((req) => {
   const errors = validateItemBody(req.body, 'update');
   errors.push(...validateDateString(req.body.dateFound, 'dateFound'));
   errors.push(
@@ -274,7 +270,7 @@ exports.validateFoundItemUpdate = runValidation((req) => {
   return errors;
 });
 
-exports.validateItemSearchQuery = runValidation((req) => {
+export const validateItemSearchQuery = runValidation((req) => {
   const errors = [];
   const { status, type, fromDate, toDate, limit, page } = req.query;
 
@@ -300,7 +296,7 @@ exports.validateItemSearchQuery = runValidation((req) => {
   return errors;
 });
 
-exports.validateClaimCreate = runValidation((req) => {
+export const validateClaimCreate = runValidation((req) => {
   const body = req.body;
   const errors = [];
 
@@ -323,7 +319,7 @@ exports.validateClaimCreate = runValidation((req) => {
   return errors;
 });
 
-exports.validateClaimUpdate = runValidation((req) => {
+export const validateClaimUpdate = runValidation((req) => {
   const body = req.body;
   const errors = [];
 

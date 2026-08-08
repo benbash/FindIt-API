@@ -1,11 +1,11 @@
-const express = require('express');
-const { protect } = require('../middleware/authMiddleware');
-const { getProfile, updateProfile } = require('../controllers/userController');
-const { validateProfileUpdate } = require('../middleware/validateRequest');
+import express from 'express';
+import { protect } from '../middleware/authMiddleware.js';
+import { getProfile, updateProfile } from '../controllers/userController.js';
+import { validateProfileUpdate } from '../middleware/validateRequest.js';
 
 const router = express.Router();
 
 router.get('/profile', protect, getProfile);
 router.patch('/profile', protect, validateProfileUpdate, updateProfile);
 
-module.exports = router;
+export default router;

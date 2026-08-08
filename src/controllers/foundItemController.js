@@ -1,8 +1,8 @@
-const FoundItem = require('../models/FoundItem');
-const Claim = require('../models/Claim');
-const AppError = require('../utils/appError');
+import FoundItem from '../models/FoundItem.js';
+import Claim from '../models/Claim.js';
+import AppError from '../utils/appError.js';
 
-exports.createFoundItem = async (req, res, next) => {
+export const createFoundItem = async (req, res, next) => {
   try {
     const foundItem = await FoundItem.create({
       ...req.body,
@@ -24,7 +24,7 @@ exports.createFoundItem = async (req, res, next) => {
   }
 };
 
-exports.getFoundItems = async (req, res, next) => {
+export const getFoundItems = async (req, res, next) => {
   try {
     const { category, city, state, status, reportedBy, keyword } = req.query;
     const filter = {};
@@ -73,7 +73,7 @@ exports.getFoundItems = async (req, res, next) => {
   }
 };
 
-exports.updateFoundItem = async (req, res, next) => {
+export const updateFoundItem = async (req, res, next) => {
   try {
     const item = await FoundItem.findById(req.params.id);
 
@@ -105,7 +105,7 @@ exports.updateFoundItem = async (req, res, next) => {
   }
 };
 
-exports.deleteFoundItem = async (req, res, next) => {
+export const deleteFoundItem = async (req, res, next) => {
   try {
     const item = await FoundItem.findById(req.params.id);
 

@@ -1,17 +1,17 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   createLostItem,
   getLostItems,
   getLostItemById,
   updateLostItem,
   deleteLostItem,
-} = require('../controllers/lostItemController');
-const { protect } = require('../middleware/authMiddleware');
-const {
+} from '../controllers/lostItemController.js';
+import { protect } from '../middleware/authMiddleware.js';
+import {
   validateObjectIdParam,
   validateLostItemCreate,
   validateLostItemUpdate,
-} = require('../middleware/validateRequest');
+} from '../middleware/validateRequest.js';
 
 const router = express.Router();
 
@@ -23,4 +23,4 @@ router
   .patch(protect, validateObjectIdParam('id'), validateLostItemUpdate, updateLostItem)
   .delete(protect, validateObjectIdParam('id'), deleteLostItem);
 
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-const { updateProfileService } = require('../services/userService');
+import { updateProfileService } from '../services/userService.js';
 
-exports.getProfile = async (req, res) => {
+export const getProfile = async (req, res) => {
   return res.status(200).json({
     success: true,
     message: 'Profile retrieved successfully',
@@ -8,7 +8,7 @@ exports.getProfile = async (req, res) => {
   });
 };
 
-exports.updateProfile = async (req, res, next) => {
+export const updateProfile = async (req, res, next) => {
   try {
     const updatedUser = await updateProfileService(req.user._id, req.body);
 

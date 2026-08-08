@@ -1,8 +1,8 @@
-const crypto = require('crypto');
-const User = require('../models/User');
-const generateToken = require('../utils/generateToken');
-const AppError = require('../utils/appError');
-const sendEmail = require('../utils/sendEmail');
+import crypto from 'crypto';
+import User from '../models/User.js';
+import generateToken from '../utils/generateToken.js';
+import AppError from '../utils/appError.js';
+import sendEmail from '../utils/sendEmail.js';
 
 const sanitizeUser = (user) => ({
   _id: user._id,
@@ -18,7 +18,7 @@ const sanitizeUser = (user) => ({
   updatedAt: user.updatedAt,
 });
 
-exports.registerUser = async (req, res, next) => {
+export const registerUser = async (req, res, next) => {
   try {
     const { fullName, email, password, phoneNumber, state, lga, role } = req.body;
     const normalizedEmail = email.toLowerCase();
@@ -50,7 +50,7 @@ exports.registerUser = async (req, res, next) => {
   }
 };
 
-exports.loginUser = async (req, res, next) => {
+export const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
@@ -70,7 +70,7 @@ exports.loginUser = async (req, res, next) => {
   }
 };
 
-exports.forgotPassword = async (req, res, next) => {
+export const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ email: email.toLowerCase() });
@@ -108,7 +108,7 @@ exports.forgotPassword = async (req, res, next) => {
   }
 };
 
-exports.resetPassword = async (req, res, next) => {
+export const resetPassword = async (req, res, next) => {
   try {
     const { token } = req.params;
     const { password } = req.body;
@@ -137,7 +137,7 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
-exports.getMe = async (req, res) => {
+export const getMe = async (req, res) => {
   return res.status(200).json({
     success: true,
     data: sanitizeUser(req.user),

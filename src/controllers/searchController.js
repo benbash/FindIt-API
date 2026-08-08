@@ -1,5 +1,5 @@
-const LostItem = require('../models/LostItem');
-const FoundItem = require('../models/FoundItem');
+import LostItem from '../models/LostItem.js';
+import FoundItem from '../models/FoundItem.js';
 
 const matchesKeyword = (keyword) => ({
   $or: [
@@ -49,7 +49,7 @@ const buildFilter = ({ category, location, status, keyword, fromDate, toDate }, 
   return filter;
 };
 
-exports.searchItems = async (req, res, next) => {
+export const searchItems = async (req, res, next) => {
   try {
     const {
       category,

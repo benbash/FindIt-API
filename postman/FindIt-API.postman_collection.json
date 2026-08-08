@@ -61,7 +61,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Black Backpack\",\n  \"description\": \"Contains a laptop and notebooks\",\n  \"category\": \"Bag\",\n  \"location\": {\n    \"description\": \"Near the school library\",\n    \"city\": \"Lagos\",\n    \"state\": \"Lagos\",\n    \"country\": \"Nigeria\",\n    \"landmark\": \"Main gate\"\n  },\n  \"dateLost\": \"2026-07-30T10:00:00.000Z\",\n  \"contactPhone\": \"+2348012345678\",\n  \"tags\": [\"black\", \"laptop\"],\n  \"images\": [\"https://example.com/bag.jpg\"],\n  \"rewardAmount\": 5000\n}"
+              "raw": "{\n  \"title\": \"Black Backpack\",\n  \"description\": \"Contains a laptop and notebooks\",\n  \"category\": \"Bag\",\n  \"location\": {\n    \"description\": \"Near the school library\",\n    \"city\": \"Lagos\",\n    \"state\": \"Lagos\",\n    \"country\": \"Nigeria\",\n    \"landmark\": \"Main gate\"\n  },\n  \"dateLost\": \"2026-07-30T10:00:00.000Z\",\n  \"contactPhone\": \"+2348012345678\",\n  \"tags\": [\"black\", \"laptop\"],\n  \"images\": [\"https://example.com/bag.jpg\"]\n}"
             },
             "url": "{{baseUrl}}/api/lost-items"
           }
@@ -82,7 +82,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"status\": \"recovered\",\n  \"rewardAmount\": 7000\n}"
+              "raw": "{\n  \"status\": \"recovered\"\n}"
             },
             "url": "{{baseUrl}}/api/lost-items/{{lostItemId}}"
           }

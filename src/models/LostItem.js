@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const lostItemSchema = new mongoose.Schema(
   {
@@ -53,11 +53,6 @@ const lostItemSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
-    rewardAmount: {
-      type: Number,
-      default: 0,
-      min: 0,
-    },
     isAnonymous: {
       type: Boolean,
       default: false,
@@ -68,4 +63,4 @@ const lostItemSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('LostItem', lostItemSchema);
+export default mongoose.model('LostItem', lostItemSchema);

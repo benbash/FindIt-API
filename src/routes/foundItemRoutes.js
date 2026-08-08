@@ -1,16 +1,16 @@
-const express = require('express');
-const {
+import express from 'express';
+import {
   createFoundItem,
   getFoundItems,
   updateFoundItem,
   deleteFoundItem,
-} = require('../controllers/foundItemController');
-const { protect } = require('../middleware/authMiddleware');
-const {
+} from '../controllers/foundItemController.js';
+import { protect } from '../middleware/authMiddleware.js';
+import {
   validateObjectIdParam,
   validateFoundItemCreate,
   validateFoundItemUpdate,
-} = require('../middleware/validateRequest');
+} from '../middleware/validateRequest.js';
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router
   .patch(protect, validateObjectIdParam('id'), validateFoundItemUpdate, updateFoundItem)
   .delete(protect, validateObjectIdParam('id'), deleteFoundItem);
 
-module.exports = router;
+export default router;
