@@ -1,31 +1,11 @@
 {
   "name": "findit-api",
   "version": "1.0.0",
-<<<<<<< HEAD
-  "description": "Community Lost and Found API",
-  "type": "module",
-  "main": "src/server.js",
-  "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js"
-  },
-  "keywords": [],
-  "author": "Benshak Bash",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "dotenv": "^17.4.2",
-    "express": "^5.2.1",
-    "express-validator": "^7.3.2",
-    "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.9.0",
-    "nodemailer": "^6.9.15",
-=======
   "description": "Community lost and found API",
   "main": "src/app.js",
   "scripts": {
-    "start": "node ./src/app.js",
-    "dev": "node ./node_modules/nodemon/bin/nodemon.js ./src/app.js"
+    "start": "node ./src/server.js",
+    "dev": "node ./node_modules/nodemon/bin/nodemon.js ./src/server.js"
   },
   "keywords": [
     "express",
@@ -48,7 +28,6 @@
     "nodemailer": "^6.9.15"
   },
   "devDependencies": {
->>>>>>> origin/master
     "nodemon": "^3.1.14"
   }
 }
