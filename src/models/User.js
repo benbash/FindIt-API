@@ -1,59 +1,10 @@
-<<<<<<< HEAD
-import mongoose from "mongoose";
-
-=======
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
->>>>>>> origin/master
 
 const userSchema = new mongoose.Schema(
   {
     fullName: {
       type: String,
-<<<<<<< HEAD
-      required: true,
-      trim: true,
-    },
-
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
-
-    password: {
-      type: String,
-      required: true,
-      minlength: 6,
-    },
-
-    phoneNumber: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
-    state: {
-       type: String,
-       required: true,
-       trim: true,
-    },
-
-    lga: {
-       type: String,
-       required: true,
-       trim: true,
-    }, 
-     
-    role: {
-      type: String,
-      enum: ["user", "admin"],
-      default: "user",
-    },
-
-=======
       trim: true,
       default: '',
     },
@@ -99,23 +50,10 @@ const userSchema = new mongoose.Schema(
       enum: ['user', 'admin', 'customer', 'vendor', 'rider'],
       default: 'user',
     },
->>>>>>> origin/master
     isVerified: {
       type: Boolean,
       default: false,
     },
-<<<<<<< HEAD
-
-    resetPasswordToken: {
-     type: String,
-    },
-
-    resetPasswordExpires: {
-     type: Date,
-    },
-  },
-
-=======
     resetPasswordToken: {
       type: String,
     },
@@ -123,17 +61,11 @@ const userSchema = new mongoose.Schema(
       type: Date,
     },
   },
->>>>>>> origin/master
   {
     timestamps: true,
   }
 );
 
-<<<<<<< HEAD
-const User = mongoose.model("User", userSchema);
-
-export default User;
-=======
 userSchema.pre('validate', function () {
   if (!this.fullName && this.name) {
     this.fullName = this.name;
@@ -158,4 +90,3 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 export default mongoose.model('User', userSchema);
->>>>>>> origin/master

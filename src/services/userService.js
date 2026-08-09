@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-import User from "../models/User.js";
-
-export const updateProfileService = async (
-  userId,
-  updateData
-) => {
-  const updatedUser = await User.findByIdAndUpdate(
-    userId,
-    updateData,
-    {
-      new: true,
-      runValidators: true,
-    }
-  ).select("-password");
-
-  if (!updatedUser) {
-    throw new Error("User not found.");
-  }
-
-  return updatedUser;
-};
-=======
 import User from '../models/User.js';
 
 export const updateProfileService = async (userId, updateData) => {
@@ -49,4 +26,3 @@ export const updateProfileService = async (userId, updateData) => {
 
   return updatedUser;
 };
->>>>>>> origin/master
